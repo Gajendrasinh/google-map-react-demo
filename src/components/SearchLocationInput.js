@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchAction } from './../Store/actions/searchAction';
 import Autocomplete from "react-google-autocomplete";
+import store from './../Store/store';
 
 /* 
  * mapDispatchToProps
 */
-const mapDispatchToProps = (dispatch, place) => ({
+const mapDispatchToProps = (dispatch) => ({
     searchAction: (place) => dispatch(searchAction(place))
 });
 
@@ -31,10 +32,14 @@ class SearchLocationInput extends Component {
                     style={{ width: "250px", marginBottom: "10px", height: "30px" }}
                     id="countryAnother"
                     placeholder="Search here..."
-                    apiKey="AIzaSyDQRjgcwgd917cq-ufrPawhlTV8yyr5LgU"
+                    apiKey="AIzaSyCkIJMa0XbMx0pTYyEFg5n-3U6onIiG0fc"
                     onPlaceSelected={(place) => {
-                        console.log(place);
-                        this.props.searchAction(place.formatted_address)
+                        this.props.searchAction(place.formatted_address);
+                        setTimeout(() => {
+                            console.log("store.getState()")
+                            console.log(store.getState().location)
+                        }, 1000);
+
                     }}
                 />
             </div>

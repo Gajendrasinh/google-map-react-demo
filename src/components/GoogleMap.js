@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-// import configureStore from './../Store/store';
-
+import store from './../Store/store';
 
 const containerStyle = {
     width: '95%',
-    height: '95%'
+    height: '75%'
 }
 
 export class MapContainer extends Component {
 
     constructor(props) {
-        super(props);
 
-        // console.log(configureStore.getState())
+        super(props);
+        console.log("store.getState()")
+        console.log(store.getState().location)
 
         this.state = { // for google map places autocomplete
             address: '',
@@ -23,28 +23,11 @@ export class MapContainer extends Component {
             selectedPlace: {},
 
             mapCenter: {
-                lat: 49.2827291,
-                lng: -123.1207375
+                lat: 4.210484,
+                lng: 101.975769
             }
         };
     }
-
-    handleChange = address => {
-        this.setState({ address });
-    };
-
-    handleSelect = address => {
-        this.setState({ address });
-        //   geocodeByAddress(address)
-        //     .then(results => getLatLng(results[0]))
-        //     .then(latLng => {
-        //       console.log('Success', latLng);
-
-        //       // update center state
-        //       this.setState({ mapCenter: latLng });
-        //     })
-        //     .catch(error => console.error('Error', error));
-    };
 
     render() {
         return (
@@ -74,5 +57,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ('AIzaSyDQRjgcwgd917cq-ufrPawhlTV8yyr5LgU')
+    apiKey: ('AIzaSyCkIJMa0XbMx0pTYyEFg5n-3U6onIiG0fc')
 })(MapContainer)
