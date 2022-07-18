@@ -1,23 +1,23 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import store from './../Store/store';
+import { useSelector } from 'react-redux';
 
 const containerStyle = {
     width: '95%',
     height: '75%'
 }
 
+
 export class MapContainer extends Component {
 
     constructor(props) {
 
         super(props);
-        console.log("store.getState()")
-        console.log(store.getState().location)
 
-        this.state = { // for google map places autocomplete
-            address: '',
+        store.subscribe(() => this.setState({ mapCenter: store.getState().searchReducer.location }))
 
+        this.state = {
             showingInfoWindow: false,
             activeMarker: {},
             selectedPlace: {},
@@ -27,8 +27,11 @@ export class MapContainer extends Component {
                 lng: 101.975769
             }
         };
-    }
 
+    }
+    componentWillUnmount() {
+        store.unsubscribe()
+    }
     render() {
         return (
             <div id='googleMaps'>

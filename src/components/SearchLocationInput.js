@@ -4,6 +4,7 @@ import { searchAction } from './../Store/actions/searchAction';
 import Autocomplete from "react-google-autocomplete";
 import store from './../Store/store';
 
+
 /* 
  * mapDispatchToProps
 */
@@ -35,11 +36,6 @@ class SearchLocationInput extends Component {
                     apiKey="AIzaSyCkIJMa0XbMx0pTYyEFg5n-3U6onIiG0fc"
                     onPlaceSelected={(place) => {
                         this.props.searchAction(place.formatted_address);
-                        setTimeout(() => {
-                            console.log("store.getState()")
-                            console.log(store.getState().location)
-                        }, 1000);
-
                     }}
                 />
             </div>
